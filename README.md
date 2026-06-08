@@ -1,6 +1,20 @@
 # AutoQuote ROI Engine
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![OpenAI Component](https://img.shields.io/badge/OpenAI-Powered-00a37f.svg)](https://openai.com)
+
 AutoQuote ROI Engine standardizes heterogeneous supplier quotations, maps each line item to a user-owned master material code and description, runs volume-based ROI analysis, and generates a concise executive PPT report.
+
+## Problem Statement
+
+In manufacturing, hardware engineering, and procurement teams, reviewing vendor quotes is often manual, error-prone, and slow.
+
+- Quotes arrive in inconsistent formats, including Excel files, text PDFs, and scanned image PDFs.
+- Supplier cost labels differ across vendors, regions, currencies, and subcontracting structures.
+- Procurement decisions require normalized cost comparison across expected production volumes.
+
+AutoQuote ROI Engine is designed as an end-to-end automation pipeline powered by structured data models, financial analysis logic, and OpenAI-assisted parsing.
 
 ## Target Architecture
 
@@ -22,6 +36,10 @@ The project is organized as three pipeline modules.
    - Generates a one-to-two slide executive PPTX report with `python-pptx`.
    - Slide 1 summarizes supplier quotations by master material code and recommends the best supplier by volume range.
    - Slide 2 visualizes cost curves and break-even points.
+
+```text
+[Raw Quotes] -> [Parsing & LLM Mapping] -> [Six-Cost Normalization] -> [Volume ROI Analysis] -> [PPTX Report]
+```
 
 ## Standard Cost Categories
 
@@ -47,6 +65,9 @@ Notes:
 ```text
 autoquote-roi-engine/
 |-- .env.example
+|-- .gitignore
+|-- LICENSE
+|-- pyproject.toml
 |-- requirements.txt
 |-- README.md
 |-- data/
@@ -70,35 +91,15 @@ autoquote-roi-engine/
 |   |   |-- config.py
 |   |   |-- cli.py
 |   |   |-- ingestion/
-|   |   |   |-- __init__.py
-|   |   |   |-- excel_parser.py
-|   |   |   |-- pdf_parser.py
-|   |   |   |-- vision_parser.py
-|   |   |   |-- normalizer.py
 |   |   |-- roi/
-|   |   |   |-- __init__.py
-|   |   |   |-- analyzer.py
-|   |   |   |-- charts.py
 |   |   |-- reporting/
-|   |   |   |-- __init__.py
-|   |   |   |-- ppt_generator.py
 |   |   |-- schemas/
-|   |   |   |-- __init__.py
 |   |   |   |-- quote.py
-|   |   |   |-- report.py
 |   |   |-- services/
-|   |   |   |-- __init__.py
-|   |   |   |-- llm_client.py
 |   |   |-- utils/
-|   |   |   |-- __init__.py
-|   |   |   |-- currency.py
-|   |   |   |-- logging.py
 |-- tests/
-|   |-- __init__.py
 |   |-- fixtures/
-|   |   |-- .gitkeep
-|   |-- test_currency.py
-|   |-- test_roi_analyzer.py
+|   |-- test_quote_schema.py
 ```
 
 ## Setup
@@ -112,3 +113,13 @@ Copy-Item .env.example .env
 ```
 
 For scanned PDF support on Windows, install Tesseract OCR and Poppler separately, then set `TESSERACT_CMD` and `POPPLER_BIN_PATH` in `.env`.
+
+## Test
+
+```powershell
+python -m pytest
+```
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
