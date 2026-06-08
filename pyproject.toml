@@ -1,0 +1,16 @@
+[project]
+name = "autoquote-roi-engine"
+version = "0.1.0"
+description = "Normalize supplier quotations, analyze volume-based ROI, and generate executive PPT reports."
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

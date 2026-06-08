@@ -1,0 +1,2 @@
+"""Text PDF quote parser."""
+

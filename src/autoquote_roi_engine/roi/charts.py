@@ -1,0 +1,2 @@
+"""ROI chart generation."""
+
